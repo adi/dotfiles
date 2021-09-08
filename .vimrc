@@ -13,6 +13,7 @@ colorscheme codedark
 
 let g:airline_theme = 'codedark'
 
+let g:go_diagnostics_level = 2
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_variable_assignments = 1
