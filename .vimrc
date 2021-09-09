@@ -3,6 +3,9 @@ let g:go_fmt_command = "goimports"
 set completeopt-=preview
 set noswapfile
 set number
+set hlsearch
+set ignorecase
+set incsearch
 set tabstop=4
 set shiftwidth=4
 
