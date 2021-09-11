@@ -29,8 +29,8 @@ filetype plugin on " activate file type detection
 syntax on " activate syntax highlighting
 colorscheme codedark " tell vim to use vscode-dark theme
 
-nnoremap <M-Left> :bp<CR>
-nnoremap <M-Right> :bn<CR>
+nnoremap <S-Left> :bp<CR>
+nnoremap <S-Right> :bn<CR>
 nnoremap <BS> :bd<CR>
 nnoremap <Tab> <C-W><C-W>
 
@@ -92,6 +92,8 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " neoclide/coc.nvim settings
 
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+let g:coc_global_extensions = ['coc-go', 'coc-phpls', 'coc-python', 'coc-tsserver', 'coc-json', 'coc-git']
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-@> coc#refresh()
