@@ -8,6 +8,7 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'aghareza/vim-gitgrep'
 
 call plug#end()
 
