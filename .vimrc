@@ -16,6 +16,8 @@ call plug#end()
 set hidden " allow unsaved buffer to be hidden
 set completeopt-=preview " doesn't show a new window with the definition of the completed item
 set noswapfile " prevents certain build systems from freking out when seeing .swp files
+set nobackup " prevents backup
+set nowritebackup " prevents backup
 set number " classic line numbers should be visible by default
 set hlsearch " highlight search matches
 set ignorecase " ignore case by default when searching
@@ -27,11 +29,21 @@ filetype plugin on " activate file type detection
 syntax on " activate syntax highlighting
 colorscheme codedark " tell vim to use vscode-dark theme
 
-nnoremap <C-Left> :bp<CR>
-nnoremap <C-Right> :bn<CR>
+nnoremap <M-Left> :bp<CR>
+nnoremap <M-Right> :bn<CR>
+nnoremap <BS> :bd<CR>
+nnoremap <C-left> <C-W><C-H>
+nnoremap <C-right> <C-W><C-L>
 
 set foldmethod=syntax
 set foldlevelstart=20
+nnoremap <space> za
+function! NoBullshitFolding()
+    let spaces = repeat(" ", &tabstop)
+    let linetext = substitute(getline(v:foldstart), "\t", spaces, "g")
+    return linetext
+endfunction
+set foldtext=NoBullshitFolding()
 
 " netrw settings
 
@@ -55,7 +67,6 @@ let g:magit_discard_untracked_do_delete = 1
 
 nnoremap - :Explore<CR>
 nnoremap = :History<CR>
-nnoremap <BS> :bd<CR>
 
 " vim-airline/vim-airline settings
 
