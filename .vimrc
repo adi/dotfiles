@@ -94,7 +94,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
-let g:coc_global_extensions = ['coc-go', 'coc-phpls', 'coc-python', 'coc-tsserver', 'coc-json', 'coc-git']
+let g:coc_global_extensions = ['coc-go', 'coc-phpls', 'coc-python', 'coc-tsserver', 'coc-json', 'coc-yaml', 'coc-git']
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-@> coc#refresh()
