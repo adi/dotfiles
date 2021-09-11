@@ -13,6 +13,7 @@ call plug#end()
 
 " Generic vim common sense settings
 
+set wildmenu " display command completion alternatives
 set hidden " allow unsaved buffer to be hidden
 set completeopt-=preview " doesn't show a new window with the definition of the completed item
 set noswapfile " prevents certain build systems from freking out when seeing .swp files
