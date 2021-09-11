@@ -32,8 +32,7 @@ colorscheme codedark " tell vim to use vscode-dark theme
 nnoremap <M-Left> :bp<CR>
 nnoremap <M-Right> :bn<CR>
 nnoremap <BS> :bd<CR>
-nnoremap <C-left> <C-W><C-H>
-nnoremap <C-right> <C-W><C-L>
+nnoremap <Tab> <C-W><C-W>
 
 set foldmethod=syntax
 set foldlevelstart=20
