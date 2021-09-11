@@ -13,6 +13,7 @@ call plug#end()
 
 " Generic vim common sense settings
 
+set hidden " allow unsaved buffer to be hidden
 set completeopt-=preview " doesn't show a new window with the definition of the completed item
 set noswapfile " prevents certain build systems from freking out when seeing .swp files
 set number " classic line numbers should be visible by default
@@ -26,8 +27,8 @@ filetype plugin on " activate file type detection
 syntax on " activate syntax highlighting
 colorscheme codedark " tell vim to use vscode-dark theme
 
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
+nnoremap <C-Left> :bp<CR>
+nnoremap <C-Right> :bn<CR>
 
 set foldmethod=syntax
 set foldlevelstart=20
@@ -53,8 +54,8 @@ let g:magit_discard_untracked_do_delete = 1
 " junegunn/fzf.vim settings
 
 nnoremap - :Explore<CR>
-nnoremap = :Buffers<CR>
-nnoremap <BS> :History<CR>
+nnoremap = :History<CR>
+nnoremap <BS> :bd<CR>
 
 " vim-airline/vim-airline settings
 
