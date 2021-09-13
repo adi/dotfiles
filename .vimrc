@@ -9,11 +9,15 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'aghareza/vim-gitgrep'
+Plug 'tpope/vim-fugitive'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
 " Generic vim common sense settings
 
+set nocompatible " we don't need vi compat
+set backspace=indent,eol,start " make backspace behave normally
 set wildmenu " display command completion alternatives
 set hidden " allow unsaved buffer to be hidden
 set completeopt-=preview " doesn't show a new window with the definition of the completed item
@@ -49,6 +53,10 @@ set foldtext=NoBullshitFolding()
 " netrw settings
 
 let g:netrw_localrmdir='rm -r'
+
+" Yggdroot/indentLine settings
+
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " fatih/vim-go settings
 
