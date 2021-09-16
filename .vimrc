@@ -76,7 +76,6 @@ let g:magit_discard_untracked_do_delete = 1
 
 " junegunn/fzf.vim settings
 
-nnoremap <silent><leader>r :Rg<CR>
 nnoremap <silent>// :Rg <C-R>=expand("<cword>")<CR><CR>
 vnoremap <silent>// y:Rg <C-R>"<CR>
 
