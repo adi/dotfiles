@@ -40,7 +40,7 @@ colorscheme seoul256 " tell vim to use a theme
 
 " Extremely cool generic vim key mappings
 
-nnoremap <leader>n :set invnumber<CR>
+nnoremap <leader>n :bufdo set invnumber<CR>
 nnoremap <leader>e :Explore<CR>
 
 nnoremap <silent> <S-Left> :bp<CR>
