@@ -3,14 +3,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'fatih/vim-go'
 Plug 'jreybert/vimagit'
-Plug 'vim-airline/vim-airline'
-Plug 'tomasiser/vim-code-dark'
+Plug 'junegunn/seoul256.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'aghareza/vim-gitgrep'
 Plug 'tpope/vim-fugitive'
-Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -33,11 +32,11 @@ set shiftwidth=4 " how much should indent when going to the next line (if not a 
 
 filetype plugin on " activate file type detection
 syntax on " activate syntax highlighting
-colorscheme codedark " tell vim to use vscode-dark theme
+let g:seoul256_background = 233 " darkest variant of seoul256 selected
+colorscheme seoul256 " tell vim to use a theme
 
 nnoremap <S-Left> :bp<CR>
 nnoremap <S-Right> :bn<CR>
-nnoremap <BS> :bd<CR>
 nnoremap <Tab> <C-W><C-W>
 
 set foldmethod=syntax
@@ -54,13 +53,16 @@ set foldtext=NoBullshitFolding()
 
 let g:netrw_localrmdir='rm -r'
 
-" Yggdroot/indentLine settings
+" itchyny/lightline.vim settings
 
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+set laststatus=2
+set noshowmode
 
 " fatih/vim-go settings
 
 let g:go_code_completion_enabled = 0 " let coc-go do this
+let g:go_doc_keywordprg_enabled = 0 " let coc-go do this
+
 let g:go_diagnostics_level = 2 " find compiling issues while editing
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
@@ -76,28 +78,7 @@ let g:magit_discard_untracked_do_delete = 1
 
 nnoremap - :Explore<CR>
 nnoremap = :History<CR>
-
-" vim-airline/vim-airline settings
-
-let g:airline_theme = 'codedark'
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = ' '
-let g:airline_symbols.colnr = '✕'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_symbols.readonly = 'r/o'
-let g:airline_symbols.maxlinenr = ''
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+nnoremap ` :Buffers<CR>
 
 " neoclide/coc.nvim settings
 
