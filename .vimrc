@@ -1,15 +1,18 @@
 " Plugins in use
 call plug#begin('~/.vim/plugged')
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go'
+
+Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
+
 Plug 'junegunn/seoul256.vim'
-Plug 'itchyny/lightline.vim'
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'aghareza/vim-gitgrep'
-Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -23,21 +26,27 @@ set completeopt-=preview " doesn't show a new window with the definition of the 
 set noswapfile " prevents certain build systems from freking out when seeing .swp files
 set nobackup " prevents backup
 set nowritebackup " prevents backup
-set number " classic line numbers should be visible by default
+set nonumber " classic line numbers should not be visible by default
 set hlsearch " highlight search matches
 set ignorecase " ignore case by default when searching
 set incsearch " search as you type
 set tabstop=4 " how large should a tab look
 set shiftwidth=4 " how much should indent when going to the next line (if not a multiple of tabstop, it will add extra spaces)
+set title " display file name in shell title
 
 filetype plugin on " activate file type detection
 syntax on " activate syntax highlighting
 let g:seoul256_background = 233 " darkest variant of seoul256 selected
 colorscheme seoul256 " tell vim to use a theme
 
-nnoremap <S-Left> :bp<CR>
-nnoremap <S-Right> :bn<CR>
-nnoremap <Tab> <C-W><C-W>
+" Extremely cool generic vim key mappings
+
+nnoremap <silent> <S-Left> :bp<CR>
+nnoremap <silent> <S-Right> :bn<CR>
+nnoremap <silent> <Tab> <C-W><C-W>
+nnoremap ; :
+
+" Folding options
 
 set foldmethod=syntax
 set foldlevelstart=20
@@ -48,15 +57,6 @@ function! NoBullshitFolding()
     return linetext
 endfunction
 set foldtext=NoBullshitFolding()
-
-" netrw settings
-
-let g:netrw_localrmdir='rm -r'
-
-" itchyny/lightline.vim settings
-
-set laststatus=2
-set noshowmode
 
 " fatih/vim-go settings
 
@@ -76,9 +76,9 @@ let g:magit_discard_untracked_do_delete = 1
 
 " junegunn/fzf.vim settings
 
-nnoremap - :Explore<CR>
-nnoremap = :History<CR>
-nnoremap ` :Buffers<CR>
+nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :History<CR>
 
 " neoclide/coc.nvim settings
 
