@@ -64,9 +64,6 @@ function! NoBullshitFolding()
 endfunction
 set foldtext=NoBullshitFolding()
 
-" psliwka/vim-smoothie settings
-let g:smoothie_experimental_mappings = 1
-
 " fatih/vim-go settings
 
 let g:go_code_completion_enabled = 0 " let coc-go do this
