@@ -7,6 +7,7 @@ Plug 'fatih/vim-go'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 
+Plug 'psliwka/vim-smoothie'
 Plug 'ap/vim-buftabline'
 Plug 'junegunn/seoul256.vim'
 
@@ -62,6 +63,9 @@ function! NoBullshitFolding()
     return linetext
 endfunction
 set foldtext=NoBullshitFolding()
+
+" psliwka/vim-smoothie settings
+let g:smoothie_experimental_mappings = 1
 
 " fatih/vim-go settings
 
