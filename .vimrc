@@ -32,6 +32,7 @@ set incsearch " search as you type
 set tabstop=4 " how large should a tab look
 set shiftwidth=4 " how much should indent when going to the next line (if not a multiple of tabstop, it will add extra spaces)
 set title " display file name in shell title
+set laststatus=2 " display file name at bottom of window
 
 filetype plugin on " activate file type detection
 syntax on " activate syntax highlighting
