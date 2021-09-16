@@ -40,7 +40,6 @@ colorscheme seoul256 " tell vim to use a theme
 " Extremely cool generic vim key mappings
 
 nnoremap <leader>e :Explore<CR>
-nnoremap <leader>r :Rg<CR>
 
 nnoremap <silent> <S-Left> :bp<CR>
 nnoremap <silent> <S-Right> :bn<CR>
@@ -77,10 +76,15 @@ let g:magit_discard_untracked_do_delete = 1
 
 " junegunn/fzf.vim settings
 
-nnoremap <leader>g :GFiles<CR>
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>h :History<CR>
+nnoremap <silent><leader>r :Rg<CR>
+nnoremap <silent>// :Rg <C-R>=expand("<cword>")<CR><CR>
+vnoremap <silent>// y:Rg <C-R>"<CR>
+
+nnoremap <silent><leader>g :GFiles<CR>
+nnoremap <silent><leader>f :Files<CR>
+nnoremap <silent><leader>b :Buffers<CR>
+nnoremap <silent><leader>h :History<CR>
+nnoremap <silent><leader>t :Tags<CR>
 
 " neoclide/coc.nvim settings
 
