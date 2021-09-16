@@ -7,6 +7,7 @@ Plug 'fatih/vim-go'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 
+Plug 'ap/vim-buftabline'
 Plug 'junegunn/seoul256.vim'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
