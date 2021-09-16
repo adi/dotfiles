@@ -46,6 +46,8 @@ nnoremap <leader>e :Explore<CR>
 
 nnoremap <silent> <S-Left> :bp<CR>
 nnoremap <silent> <S-Right> :bn<CR>
+nnoremap <silent> <S-Q> :bd<CR>
+
 nnoremap <silent> <Tab> <C-W><C-W>
 nnoremap ; :
 
