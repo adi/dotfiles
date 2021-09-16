@@ -12,8 +12,6 @@ Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'aghareza/vim-gitgrep'
-
 call plug#end()
 
 " Generic vim common sense settings
@@ -40,6 +38,9 @@ let g:seoul256_background = 233 " darkest variant of seoul256 selected
 colorscheme seoul256 " tell vim to use a theme
 
 " Extremely cool generic vim key mappings
+
+nnoremap <leader>e :Explore<CR>
+nnoremap <leader>r :Rg<CR>
 
 nnoremap <silent> <S-Left> :bp<CR>
 nnoremap <silent> <S-Right> :bn<CR>
@@ -76,7 +77,8 @@ let g:magit_discard_untracked_do_delete = 1
 
 " junegunn/fzf.vim settings
 
-nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>g :GFiles<CR>
+nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 
