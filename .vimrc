@@ -54,7 +54,8 @@ nnoremap ; :
 
 " Folding options
 
-set foldmethod=syntax
+set foldmethod=indent
+au FileType go set foldmethod=syntax
 set foldlevelstart=20
 nnoremap <space> za
 function! NoBullshitFolding()
