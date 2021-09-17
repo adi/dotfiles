@@ -14,6 +14,9 @@ Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'adi/vim-indent-rainbow'
+Plug 'wincent/terminus'
+
 call plug#end()
 
 " Generic vim common sense settings
