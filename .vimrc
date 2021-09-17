@@ -15,7 +15,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'adi/vim-indent-rainbow'
-Plug 'wincent/terminus'
 
 call plug#end()
 
@@ -29,7 +28,8 @@ set completeopt-=preview " doesn't show a new window with the definition of the 
 set noswapfile " prevents certain build systems from freking out when seeing .swp files
 set nobackup " prevents backup
 set nowritebackup " prevents backup
-set nonumber " classic line numbers should not be visible by default
+set number " classic line numbers should not be visible by default but this together with the next line make hybrid lines
+set relativenumber " relative line numbers should be visible by default
 set hlsearch " highlight search matches
 set ignorecase " ignore case by default when searching
 set incsearch " search as you type
@@ -37,6 +37,7 @@ set tabstop=4 " how large should a tab look
 set shiftwidth=4 " how much should indent when going to the next line (if not a multiple of tabstop, it will add extra spaces)
 set title " display file name in shell title
 set laststatus=2 " display file name at bottom of window
+set signcolumn=yes " always display the left gutter
 
 filetype plugin on " activate file type detection
 syntax on " activate syntax highlighting
@@ -45,7 +46,7 @@ colorscheme seoul256 " tell vim to use a theme
 
 " Extremely cool generic vim key mappings
 
-nnoremap <leader>n :bufdo set invnumber<CR>
+nnoremap <leader>n :bufdo set relativenumber!<CR>:bufdo set number!<CR>
 nnoremap <leader>e :Explore<CR>
 
 nnoremap <silent> <S-Left> :bp<CR>
@@ -58,7 +59,9 @@ nnoremap ; :
 " Folding options
 
 set foldmethod=indent
-au FileType go set foldmethod=syntax
+augroup gofoldgroup
+	au FileType go set foldmethod=syntax
+augroup END
 set foldlevelstart=20
 nnoremap <space> za
 function! NoBullshitFolding()
