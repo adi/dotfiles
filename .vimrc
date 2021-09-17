@@ -46,13 +46,6 @@ colorscheme seoul256 " tell vim to use a theme
 
 set timeoutlen=1000 ttimeoutlen=50
 
-set cursorline
-augroup inserthigh
-	autocmd InsertEnter * highlight  CursorLine ctermbg=Black
-	autocmd InsertLeave * highlight  CursorLine ctermbg=233
-augroup END
-highlight CursorLine ctermbg=233
-
 " Extremely cool generic vim key mappings
 
 nnoremap <leader>n :bufdo set relativenumber!<CR>:bufdo set number!<CR>
