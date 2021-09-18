@@ -15,6 +15,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'adi/vim-indent-rainbow'
+Plug 'adi/vim-left-decorators'
 
 call plug#end()
 
@@ -48,7 +49,6 @@ set timeoutlen=1000 ttimeoutlen=50
 
 " Extremely cool generic vim key mappings
 
-nnoremap <leader>n :bufdo set relativenumber!<CR>:bufdo set number!<CR>
 nnoremap <leader>e :Explore<CR>
 
 nnoremap <silent> <S-Left> :bp<CR>
@@ -56,6 +56,7 @@ nnoremap <silent> <S-Right> :bn<CR>
 nnoremap <silent> <S-Q> :bd<CR>
 
 nnoremap <silent> <Tab> <C-W><C-W>
+
 nnoremap ; :
 
 " Folding options
