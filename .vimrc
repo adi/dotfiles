@@ -59,6 +59,13 @@ nnoremap <silent> <Tab> <C-W><C-W>
 
 nnoremap ; :
 
+" Specific termux stuff
+
+if system("which termux-setup-storage")!= ""
+	nnoremap <leader>v :r !termux-clipboard-get<CR>
+    nnoremap <leader>c :.w !termux-clipboard-set<CR>
+endif
+
 " Folding options
 
 set foldmethod=indent
