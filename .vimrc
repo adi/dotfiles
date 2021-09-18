@@ -6,6 +6,7 @@ Plug 'fatih/vim-go'
 
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
+Plug 'iberianpig/tig-explorer.vim'
 
 Plug 'psliwka/vim-smoothie'
 Plug 'ap/vim-buftabline'
