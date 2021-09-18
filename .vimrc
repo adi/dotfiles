@@ -40,11 +40,17 @@ set title " display file name in shell title
 set laststatus=2 " display file name at bottom of window
 set signcolumn=yes " always display the left gutter
 
+" Syntax highlighting
 filetype plugin on " activate file type detection
 syntax on " activate syntax highlighting
+
+" Color theme
 let g:seoul256_background = 233 " darkest variant of seoul256 selected
 colorscheme seoul256 " tell vim to use a theme
+hi SignColumn ctermbg=232
+hi LineNr ctermbg=232 ctermfg=237
 
+" Snapiness
 set timeoutlen=1000 ttimeoutlen=50
 
 " Extremely cool generic vim key mappings
