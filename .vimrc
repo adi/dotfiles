@@ -50,6 +50,13 @@ colorscheme seoul256 " tell vim to use a theme
 hi SignColumn ctermbg=232
 hi LineNr ctermbg=232 ctermfg=237
 
+" Cursor shapes for modes
+
+let &t_SI = "\e[5 q"
+let &t_SR = "\e[3 q" 
+let &t_EI = "\e[1 q"
+let &t_ER = "\e[1 q"
+
 " Snapiness
 set timeoutlen=1000 ttimeoutlen=50
 
@@ -68,8 +75,8 @@ nnoremap ; :
 " Specific termux stuff
 
 if system("which termux-setup-storage")!= ""
-	nnoremap <leader>v :r !termux-clipboard-get<CR>
-    nnoremap <leader>c :.w !termux-clipboard-set<CR>
+	nnoremap <silent> <leader>v :r !termux-clipboard-get<CR>
+    nnoremap <silent> <leader>c :.w !termux-clipboard-set<CR>
 endif
 
 " Folding options
