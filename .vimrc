@@ -38,6 +38,7 @@ set shiftwidth=4 " how much should indent when going to the next line (if not a 
 set title " display file name in shell title
 set laststatus=2 " display file name at bottom of window
 set signcolumn=yes " always display the left gutter
+set mouse=a " activate mouse support
 
 " Syntax highlighting
 filetype plugin on " activate file type detection
@@ -60,8 +61,6 @@ let &t_ER = "\e[2 q"
 set timeoutlen=1000 ttimeoutlen=50
 
 " Extremely cool generic vim key mappings
-
-nnoremap <leader>e :Explore<CR>
 
 nnoremap <silent> <S-Left> :bp<CR>
 nnoremap <silent> <S-Right> :bn<CR>
@@ -92,6 +91,12 @@ function! NoBullshitFolding()
     return linetext
 endfunction
 set foldtext=NoBullshitFolding()
+
+" file browsing settings
+
+nnoremap <leader>e :Explore<CR>
+
+let g:netrw_banner=0 " don't display annoying banner
 
 " fatih/vim-go settings
 
