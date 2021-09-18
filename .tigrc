@@ -1,4 +1,5 @@
 bind status P !git push origin
+bind main Q !git pull origin
 bind status Q !git pull origin
 
 set line-graphics = utf-8
