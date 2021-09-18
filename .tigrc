@@ -1,2 +1,3 @@
 bind status P !git push origin
+set line-graphics = utf-8
 
