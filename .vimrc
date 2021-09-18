@@ -52,10 +52,10 @@ hi LineNr ctermbg=232 ctermfg=237
 
 " Cursor shapes for modes
 
-let &t_SI = "\e[5 q"
-let &t_SR = "\e[3 q" 
-let &t_EI = "\e[1 q"
-let &t_ER = "\e[1 q"
+let &t_SI = "\e[6 q"
+let &t_SR = "\e[4 q" 
+let &t_EI = "\e[2 q"
+let &t_ER = "\e[2 q"
 
 " Snapiness
 set timeoutlen=1000 ttimeoutlen=50
