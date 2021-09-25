@@ -23,10 +23,11 @@
 
 ;; enable git-gutter and sync it with magit
 (require 'git-gutter+)
+(require 'magit)
 (global-git-gutter+-mode t)
 
 (add-hook 'magit-post-refresh-hook
-          #'git-gutter:update-all-windows)
+          #'git-gutter+:update-all-windows)
 
 ;; enable language server interaction
 (require 'lsp-mode)
