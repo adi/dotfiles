@@ -10,7 +10,7 @@
  '(custom-safe-themes
    '("f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" default))
  '(package-selected-packages
-   '(git-gutter vscode-dark-plus-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
+   '(git-gutter+ vscode-dark-plus-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -22,12 +22,21 @@
 (centaur-tabs-mode t)
 
 ;; enable git-gutter and sync it with magit
-(require 'git-gutter)
+(require 'git-gutter+)
 (require 'magit)
-(global-git-gutter-mode t)
+(global-git-gutter+-mode t)
+
+(defun git-gutter+-update-all-windows ()
+  "Update git-gutter+ information for all visible buffers."
+        (interactive)
+        (dolist (buf (buffer-list))
+          (when (get-buffer-window buf 'visible)
+            (with-current-buffer buf
+              (when git-gutter+-mode
+	            (git-gutter+))))))
 
 (add-hook 'magit-post-refresh-hook
-          #'git-gutter:update-all-windows)
+          #'git-gutter+-update-all-windows)
 
 ;; enable language server interaction
 (require 'lsp-mode)
