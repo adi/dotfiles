@@ -1,6 +1,5 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (custom-set-variables
@@ -8,8 +7,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" default))
  '(package-selected-packages
-   '(centaur-tabs yasnippet-snippets flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
+   '(git-gutter+ vscode-dark-plus-theme centaur-tabs yasnippet-snippets flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -19,6 +20,12 @@
 
 ;; enable tabs
 (centaur-tabs-mode t)
+
+;; git gutter
+(require 'git-gutter+)
+
+;; If you enable global minor mode
+(global-git-gutter+-mode t)
 
 ;; enable language server interaction
 (require 'lsp-mode)
@@ -87,3 +94,6 @@
  'neotree-mode-hook
  (lambda ()
    (define-key neotree-mode-map (kbd "RET") 'neotree-enter-hide)))
+
+;; set vscode theme
+(load-theme 'vscode-dark-plus t)
