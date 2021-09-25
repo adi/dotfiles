@@ -26,7 +26,7 @@
 (require 'magit)
 (global-git-gutter+-mode t)
 
-(defun git-gutter+-update-all-windows ()
+(defun git-gutter-update-all-windows ()
   "Update git-gutter+ information for all visible buffers."
         (interactive)
         (dolist (buf (buffer-list))
@@ -36,7 +36,7 @@
 	            (git-gutter+))))))
 
 (add-hook 'magit-post-refresh-hook
-          #'git-gutter+-update-all-windows)
+          #'git-gutter-update-all-windows)
 
 ;; enable language server interaction
 (require 'lsp-mode)
