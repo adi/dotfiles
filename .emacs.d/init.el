@@ -21,8 +21,9 @@
 ;; enable tabs
 (centaur-tabs-mode t)
 
-;; git gutter
+;; git gutter & magit
 (require 'git-gutter+)
+(require 'magit)
 
 ;; If you enable global minor mode
 (global-git-gutter+-mode t)
