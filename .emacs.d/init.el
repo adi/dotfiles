@@ -24,6 +24,9 @@
 ;; enable git-gutter and sync it with magit
 (require 'git-gutter+)
 (require 'magit)
+
+(global-set-key [f12] 'magit)
+
 (global-git-gutter+-mode t)
 
 (defun git-gutter-update-all-windows ()
