@@ -33,7 +33,8 @@
           (when (get-buffer-window buf 'visible)
             (with-current-buffer buf
               (when git-gutter+-mode
-	            (git-gutter+))))))
+	            (git-gutter+-mode)
+				(git-gutter+-mode))))))
 
 (add-hook 'magit-post-refresh-hook
           #'git-gutter-update-all-windows)
