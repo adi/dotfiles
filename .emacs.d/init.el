@@ -49,6 +49,7 @@
 (add-hook 'my-magit-after-stage-hooks
           'my-refresh-visible-git-gutter-buffers)
 
+
 ;; enable language server interaction
 (require 'lsp-mode)
 (add-hook 'go-mode-hook #'lsp-deferred)
