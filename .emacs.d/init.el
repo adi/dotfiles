@@ -9,13 +9,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(yasnippet-snippets flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
+   '(centaur-tabs yasnippet-snippets flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; enable tabs
+(centaur-tabs-mode t)
 
 ;; enable language server interaction
 (require 'lsp-mode)
@@ -66,6 +69,8 @@
 ;; map NeoTree toggle
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+(setq neo-window-position 'right)
 
 (defun neo-open-file-hide (full-path &optional arg)
   "Open a file node and hides tree."
