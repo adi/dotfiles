@@ -1,4 +1,5 @@
 bind status P !git push origin
+bind status D !rm %(file)
 bind main L !git pull origin
 bind status L !git pull origin
 
