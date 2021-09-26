@@ -55,9 +55,6 @@
 ;; disable lsp eldoc from bottom bar
 (setq lsp-eldoc-enable-hover nil)
 
-;; hide symbol highlights
-;;(setq lsp-enable-symbol-highlighting nil)
-
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
