@@ -78,8 +78,9 @@
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-;; stop creating temp files
+;; stop creating temp and auto-save files
 (setq create-lockfiles nil)
+(setq auto-save-default nil)
 
 ;; don't show menu bar
 (menu-bar-mode -1)
