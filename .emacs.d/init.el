@@ -117,3 +117,6 @@
 
 ;; set vscode theme
 (load-theme 'vscdark t)
+
+;; enable company completion globally
+(global-company-mode)
