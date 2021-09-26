@@ -10,13 +10,18 @@
  '(custom-safe-themes
    '("f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" default))
  '(package-selected-packages
-   '(indent-guide git-gutter+ vscode-dark-plus-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
+   '(guide-key helm-descbinds indent-guide git-gutter+ vscode-dark-plus-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; enable guide-key
+(require 'guide-key)
+(setq guide-key/guide-key-sequence t)
+(guide-key-mode 1)
 
 ;; enable tabs
 (centaur-tabs-mode t)
@@ -64,6 +69,9 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; Set a different more available command prefix
+(define-key lsp-mode-map (kbd "C-c C-l") lsp-command-map)
 
 ;; activate snippets
 (require 'yasnippet)
