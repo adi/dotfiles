@@ -10,7 +10,7 @@
  '(custom-safe-themes
    '("f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" default))
  '(package-selected-packages
-   '(git-gutter+ vscode-dark-plus-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
+   '(indent-guide git-gutter+ vscode-dark-plus-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -23,6 +23,9 @@
 
 ;; fix scrolling
 (setq scroll-conservatively 10000)
+
+;; enable indent guides
+(indent-guide-global-mode t)
 
 ;; enable git-gutter and sync it with magit
 (require 'git-gutter+)
