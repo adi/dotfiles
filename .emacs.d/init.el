@@ -21,6 +21,9 @@
 ;; enable tabs
 (centaur-tabs-mode t)
 
+;; fix scrolling
+(setq scroll-conservatively 10000)
+
 ;; enable git-gutter and sync it with magit
 (require 'git-gutter+)
 (require 'magit)
