@@ -81,6 +81,7 @@
 ;; stop creating temp and auto-save files
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
+(setq make-backup-files nil)
 
 ;; don't show menu bar
 (menu-bar-mode -1)
