@@ -10,7 +10,7 @@
  '(custom-safe-themes
    '("f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" default))
  '(package-selected-packages
-   '(guide-key helm-descbinds indent-guide git-gutter+ vscode-dark-plus-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
+   '(guide-key indent-guide git-gutter+ vscdark-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
