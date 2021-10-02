@@ -33,9 +33,8 @@
 (use-package lsp-ui
   :ensure t
   :config
-  ;; configure breadcrumbs from top bar
-  (setq lsp-headerline-breadcrumb-segments '(project file symbols))
-  (setq lsp-headerline-breadcrumb-mode t)
+  ;; disable breadcrumbs from top bar
+  (setq lsp-headerline-breadcrumb-enable nil)
   ;; disable lsp eldoc from bottom bar
   (setq lsp-eldoc-enable-hover nil))
 
