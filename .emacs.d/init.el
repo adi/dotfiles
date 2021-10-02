@@ -1,98 +1,164 @@
+;; enable melpa if it isn't enabled
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(when (not (assoc "melpa" package-archives))
+  (setq package-archives (append '(("melpa" . "https://melpa.org/packages/")) package-archives)))
 (package-initialize)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("f4c8f0b999a6407211a899401315a628e1a5ae2f408c04a33b14d7aa3ed86187" default))
- '(package-selected-packages
-   '(guide-key indent-guide git-gutter+ vscdark-theme centaur-tabs flycheck projectile yasnippet neotree magit company lsp-ui lsp-mode go-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; refresh package list if it is not already available
+(when (not package-archive-contents) (package-refresh-contents))
 
-;; enable guide-key
-(require 'guide-key)
-(setq guide-key/guide-key-sequence t)
-(guide-key-mode 1)
+;; install use-package if it isn't already installed
+(when (not (package-installed-p 'use-package))
+  (package-install 'use-package))
 
-;; enable tabs
-(centaur-tabs-mode t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Install and configure pacakges
 
-;; fix scrolling
-(setq scroll-conservatively 10000)
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+	(exec-path-from-shell-initialize))
+  )
 
-;; enable indent guides
-(indent-guide-global-mode t)
+(use-package lsp-mode
+  :ensure t
+  ;; uncomment to enable gopls http debug server
+  ;; :custom (lsp-gopls-server-args '("-debug" "127.0.0.1:0"))
+  :config
+  ;; use flycheck, not flymake
+  (setq lsp-prefer-flymake nil))
 
-;; enable git-gutter and sync it with magit
-(require 'git-gutter+)
-(require 'magit)
+;; optional - provides fancy overlay information
+(use-package lsp-ui
+  :ensure t
+  :config
+  ;; configure breadcrumbs from top bar
+  (setq lsp-headerline-breadcrumb-segments '(project file symbols))
+  (setq lsp-headerline-breadcrumb-mode t)
+  ;; disable lsp eldoc from bottom bar
+  (setq lsp-eldoc-enable-hover nil))
 
-(global-set-key [f12] 'magit)
+(use-package company
+  :ensure t
+  :config
+  ;; don't add any delay before trying to complete thing being typed
+  ;; the call/response to gopls is asynchronous so this should have little
+  ;; to no affect on edit latency
+  (setq company-idle-delay 0)
+  ;; start completing after a single character instead of 3
+  (setq company-minimum-prefix-length 1)
+  ;; align fields in completions
+  (setq company-tooltip-align-annotations t)
+  ;; enable it globally
+  (global-company-mode))
 
-(global-git-gutter+-mode t)
+;; optional package to get the error squiggles as you edit
+(use-package flycheck
+  :ensure t)
 
-(defun git-gutter-update-all-windows ()
-  "Update git-gutter+ information for all visible buffers."
-  (interactive)
-  (dolist (buf (buffer-list))
-    (when (get-buffer-window buf 'visible)
-      (with-current-buffer buf
-        (when git-gutter+-mode
-          (git-gutter+-mode)
-  		(git-gutter+-mode))))))
+;; the Go features
+(use-package go-mode
+  :ensure t
+  :after (lsp-mode)
+  :hook ((go-mode . lsp-deferred)
+         (before-save . lsp-format-buffer)
+         (before-save . lsp-organize-imports)))
 
-(add-hook 'magit-post-refresh-hook
-          #'git-gutter-update-all-windows)
+;; the PHP features
+(use-package php-mode
+  :ensure t
+  :after (lsp-mode)
+  :hook ((php-mode . lsp-deferred)))
 
-;; enable language server interaction
-(require 'lsp-mode)
-(add-hook 'go-mode-hook #'lsp-deferred)
+;; yaml helper
+(use-package yaml-mode
+  :ensure t
+  :mode (("\\.yml$" . yaml-mode)
+		 ("\\.yaml$" . yaml-mode)))
 
-;; disable lsp breadcrumbs from top bar
-(setq lsp-headerline-breadcrumb-enable nil)
+;; markdown features
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.markdown$" . markdown-mode)
+  :init (add-hook 'markdown-mode-hook 'auto-fill-mode))
 
-;; disable lsp eldoc from bottom bar
-(setq lsp-eldoc-enable-hover nil)
+;; optional, provides snippets for method signature completion
+(use-package yasnippet
+  :ensure t
+  :after (go-mode)
+  :config
+  (defun iy-ac-tab-noconflict ()
+	(let ((command (key-binding [tab]))) ; remember command
+      (local-unset-key [tab]) ; unset from (kbd "<tab>")
+      (local-set-key (kbd "TAB") command))) ; bind to (kbd "TAB")
+  (add-hook 'prog-mode 'iy-ac-tab-noconflict)
+  (yas-global-mode))
 
-;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+;; Git helpers
+(use-package magit
+  :ensure t
+  :config
+  (global-set-key [f12] 'magit))
+  
+(use-package git-gutter+
+  :ensure t
+  :after (magit)
+  :config
+  (defun git-gutter-update-all-windows ()
+	"Update git-gutter+ information for all visible buffers."
+	(interactive)
+	(dolist (buf (buffer-list))
+	  (when (get-buffer-window buf 'visible)
+		(with-current-buffer buf
+		  (when git-gutter+-mode
+			(git-gutter+-mode)
+			(git-gutter+-mode))))))
+  (add-hook 'magit-post-refresh-hook 'git-gutter-update-all-windows)
+  :hook (
+		 (prog-mode . global-git-gutter+-mode)))
 
-;; Set a different more available command prefix
-(define-key lsp-mode-map (kbd "C-c C-l") lsp-command-map)
-
-;; activate snippets
-(require 'yasnippet)
-(yas-global-mode 1)
-(defun iy-ac-tab-noconflict ()
-  (let ((command (key-binding [tab]))) ; remember command
-    (local-unset-key [tab]) ; unset from (kbd "<tab>")
-    (local-set-key (kbd "TAB") command))) ; bind to (kbd "TAB")
-(add-hook 'go-mode-hook 'iy-ac-tab-noconflict)
-
-;; activate Projectile
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Alter basic emacs behavior that doesn't make sense
 
 ;; stop creating temp and auto-save files
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 
-;; don't show menu bar
+;; don't display start-up message
+(setq inhibit-startup-screen t)
+
+;; start maximized if that's an option
+(toggle-frame-maximized)
+
+;; fix scrolling
+(setq scroll-conservatively 10000)
+
+;; disable top menu
 (menu-bar-mode -1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; XP improvements
+
+;; completion and narrowing of selection
+(use-package helm
+  :ensure t
+  :bind (("M-x" . helm-M-x)
+		 ("C-x C-f" . helm-find-files)
+		 ("C-x b" . helm-buffers-list)
+		 ("C-s" . helm-occur)
+		 ("C-r" . helm-occur)		 
+		 ("M-y" . helm-show-kill-ring))
+  :config
+  (setq completion-styles '(flex))
+  (helm-mode 1))
+
+(use-package helm-ag
+  :ensure t)
+
+(use-package helm-lsp
+  :ensure t)
 
 ;; tab should be of width 4
 (setq-default tab-width 4)
@@ -101,30 +167,39 @@
 (setq display-line-numbers-type 'relative)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-;; map NeoTree toggle
-(global-set-key [f8] 'neotree-toggle)
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+;; load the theme
+(use-package vscdark-theme
+  :ensure t
+  :config (load-theme 'vscdark t))
 
-(setq neo-window-position 'right)
+;; seeing through brackets
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
 
-(defun neo-open-file-hide (full-path &optional arg)
-  "Open a file node and hides tree."
-  (neo-global--select-mru-window arg)
-  (find-file full-path)
-  (neotree-hide))
+;; learning keys
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-setup-side-window-right-bottom)
+  (setq which-key-sort-order 'which-key-key-order-alpha
+	   which-key-side-window-max-width 0.33
+	   which-key-idle-delay 1.0)
+  (which-key-mode))
 
-(defun neotree-enter-hide (&optional arg)
-  "Enters file and hides neotree directly"
-  (interactive "P")
-  (neo-buffer--execute arg 'neo-open-file-hide 'neo-open-dir))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; The rest of this file is edited by emacs itself automatically
 
-(add-hook
- 'neotree-mode-hook
- (lambda ()
-   (define-key neotree-mode-map (kbd "RET") 'neotree-enter-hide)))
-
-;; set vscode theme
-(load-theme 'vscdark t)
-
-;; enable company completion globally
-(global-company-mode)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(helm-ag exec-path-from-shell git-gutter+ helm magit vscdark-theme rainbow-delimiters which-key markdown-mode yaml-mode php-mode go-mode flycheck company lsp-ui lsp-mode use-package)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
