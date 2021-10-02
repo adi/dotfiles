@@ -140,6 +140,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; XP improvements
 
+;; set font
+(set-face-attribute 'default nil :font "Monaco-13" )
+
 ;; completion and narrowing of selection
 (use-package helm
   :ensure t
