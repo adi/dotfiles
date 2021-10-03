@@ -120,22 +120,26 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Alter basic emacs behavior that doesn't make sense
 
+;; disable top menu and tool bar
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+
+;; don't display start-up message
+(setq inhibit-startup-screen t)
+
 ;; stop creating temp and auto-save files
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 
-;; don't display start-up message
-(setq inhibit-startup-screen t)
-
-;; start maximized if that's an option
-(toggle-frame-maximized)
+;; enable recent files
+(recentf-mode 1)
 
 ;; fix scrolling
 (setq scroll-conservatively 10000)
 
-;; disable top menu
-(menu-bar-mode -1)
+;; start maximized if that's an option
+(toggle-frame-maximized)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; XP improvements
@@ -148,15 +152,19 @@
   :ensure t
   :bind (("M-x" . helm-M-x)
 		 ("C-x C-f" . helm-find-files)
+		 ("C-x C-r" . helm-recentf)
 		 ("C-x b" . helm-buffers-list)
 		 ("C-s" . helm-occur)
 		 ("C-r" . helm-occur)		 
+		 ("C-S-s" . helm-do-ag-project-root)
 		 ("M-y" . helm-show-kill-ring))
   :config
   (setq completion-styles '(flex))
   (helm-mode 1))
 
 (use-package helm-ag
+  :config
+  (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case")
   :ensure t)
 
 (use-package helm-lsp
@@ -198,7 +206,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(helm-ag exec-path-from-shell git-gutter+ helm magit vscdark-theme rainbow-delimiters which-key markdown-mode yaml-mode php-mode go-mode flycheck company lsp-ui lsp-mode use-package)))
+   '(lsp-treemacs treemacs helm-ag exec-path-from-shell git-gutter+ helm magit vscdark-theme rainbow-delimiters which-key markdown-mode yaml-mode php-mode go-mode flycheck company lsp-ui lsp-mode use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
